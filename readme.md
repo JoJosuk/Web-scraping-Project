@@ -1,6 +1,6 @@
 # Price Comparison using Web Scraping 
 
----
+
 
 ## Introduction
 
@@ -8,7 +8,7 @@ This is repo is for our mini project, Price Comparison using Web Scraping. Its a
 software which allows users to gain data on a specific product from over
 multiple e-commerce websites.
 
----
+
 
 ## Implementation
 
