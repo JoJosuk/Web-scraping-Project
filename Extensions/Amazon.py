@@ -11,7 +11,7 @@ class Amazon:
         
         self.itemName=itemName
         self.itemPage:BeautifulSoup=BeautifulSoup(
-            self.getPage(self.getSearchLink()).content,'html.parser'
+            self.getPage(self.getSearchLink()),'html.parser'
             )
         self.itemList=self.getList()
 
@@ -23,7 +23,7 @@ class Amazon:
         return f'https://www.amazon.in/s?k={self.itemName}'
     
     def getPage(self,link:str):
-        return requests.get(link)
+        return requests.get(link).content
     
     def getList(self):
         item_cards=self.itemPage.find_all(
