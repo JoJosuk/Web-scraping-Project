@@ -33,7 +33,7 @@ class ItemObj:
         s=f'{empty:-<60}\n\
         Name:{self.name[:50]}\n\
         Price:{self.price}\n\
-        Image:{self.img[:50]}\n\
+        Image:{self.img}\n\
         HyperLink:{self.hlink[:50]}\n'
 
         return s
