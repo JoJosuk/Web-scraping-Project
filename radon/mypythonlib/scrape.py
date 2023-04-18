@@ -42,6 +42,7 @@ class myntra:
     
 
 def getdata(itemname):
+    print(itemname)
     itemName='%20'.join(itemname.strip().split())
     keyWords=[]
     itemList=[]

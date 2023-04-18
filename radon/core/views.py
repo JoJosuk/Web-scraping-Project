@@ -3,10 +3,12 @@ from mypythonlib import scrape
 from django.shortcuts import render
 import json
 # Create your views here.
+
+table=None
 def index(request):
     return render(request, 'core/index.html')
 def itemgive(request):
-    itemNames=request.GET.get('itemNames')
+    itemNames=request.GET.get('item')
     table=scrape.getdata(itemNames)
     json_records=table.reset_index().to_json(orient='records')
     arr=[]
