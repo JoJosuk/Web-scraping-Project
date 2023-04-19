@@ -100,10 +100,10 @@ def getdata(itemname):
             keyWords.extend(dis.split())
             return [name,dis,float(price),img,'https://www.myntra.com/'+str(href),'myntra']
         
-    WINDOW_SIZE = "1920,1080"
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
+    # WINDOW_SIZE = "1920,1080"
+    # chrome_options = Options()
+    # chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
     
     for no,i in enumerate(websites):      
         cardClass=i.cardClass
@@ -117,11 +117,11 @@ def getdata(itemname):
         # itemPage=requests.get(pageurl,headers={'User-Agent': 'Mozilla/5.0'}).content
         for enum in range(1,2):
             
-            driver = webdriver.Chrome(options=chrome_options)
+            driver = webdriver.Chrome()
             driver.get(pageurl2+str(enum))
             itemPage=driver.page_source
             idk = BeautifulSoup(itemPage,'html.parser')
-            driver.close()
+            #driver.close()
             if namewebsites[no]=='flipkart':
                 itemCards=idk.find_all('div',class_=cardClass)[1:]
             elif namewebsites[no]=='amazon':
