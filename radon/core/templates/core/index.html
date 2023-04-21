@@ -1,9 +1,22 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
+{% block title %}Give Item{% endblock title %}
 {% block content %}
-<form action="itemgive">
-    Item name : <input type="text" name="item">
-    <input type="submit" >
-</form>
+<body class="nay">
+    <div class="card">
+        <div class="card-content">
+            <h3 class='card-title'>Hey✌<br>Please Enter The Fashion Item You Wanna Search For</h3>
+            <div class="itemsdiv">
+                <form action="itemgive"  autocomplete="off">
+                    <input type="text" name="item">
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
 
 {% endblock content %}
