@@ -6,19 +6,21 @@
         <form action="intermediate">
             <input type="text" name="keywords" placeholder="Enter the keywords">
             <input type="text" name="pricel" placeholder='Price Filter Start'>
-            <input type="text" name="priceh" placeholder='Price Fileter End'>
+            <input type="text" name="priceh" placeholder='Price Filter End'>
             <input type="submit">
         </form>
     </div>
     <div class="idk">
         {% if d %}
         {% for i in d %}
-        <div class="card">
+        <div class="card two">
     
-            <a class='card-title' href="{{i.Link}}">{{i.Name}}</a>
-            <h1 class='card-title'>{{i.Price}}</h1>
-            <img src="{{i.Image}}" alt="">
-            <h2 class='card-title'>{{i.Website}}</h2>
+            <div class="card-content">
+                <a class='card-title' href="{{i.Link}}">{{i.Name}}</a>
+                <h1 class='card-title'>{{i.Price}}</h1>
+                <img src="{{i.Image}}" alt="">
+                <h2 class='card-title'>{{i.Website}}</h2>
+            </div>
         </div>
         {% endfor %}
         {% endif %}

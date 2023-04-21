@@ -60,7 +60,7 @@ def getdata(itemname):
             href=item.find('a',class_=hrefClass)['href']
 
             keyWords.extend(dis.split())
-            return [name,dis,float(price),img,'https://www.flipkart.com'+str(href),'flipkart']
+            return [name,dis,float(price),img,'https://www.flipkart.com'+str(href),'FLIPKART']
         elif str(websitewhich)=='amazon':
             name=item.find('span',class_=nameCard).text
             dis=item.find('span',class_=descriptionClass).text
@@ -74,7 +74,7 @@ def getdata(itemname):
             href=item.find('a',class_=hrefClass)['href']
             
             keyWords.extend(dis.split())
-            return [name,dis,float(price),img,'https://www.amazon.com'+str(href),'amazon']
+            return [name,dis,float(price),img,'https://www.amazon.com'+str(href),'AMAZON']
         elif str(websitewhich)=='myntra':
             name=item.find('h3',class_=nameCard).text
             dis=item.find('h4',class_=descriptionClass).text
@@ -98,7 +98,7 @@ def getdata(itemname):
             #     price=0
             print(price)
             keyWords.extend(dis.split())
-            return [name,dis,float(price),img,'https://www.myntra.com/'+str(href),'myntra']
+            return [name,dis,float(price),img,'https://www.myntra.com/'+str(href),'MYNTRA']
         
     # WINDOW_SIZE = "1920,1080"
     # chrome_options = Options()
