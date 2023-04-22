@@ -47,12 +47,17 @@ def getdata(itemname):
     keyWords=[]
     itemList=[]
     
-    websites = [myntra(itemName),flipkart_fashion(itemName),amazon(itemName)]
-    namewebsites=['myntra','flipkart','amazon']
+    websites = [myntra(itemName),amazon(itemName),flipkart_fashion(itemName)]
+    namewebsites=['myntra','amazon','flipkart']
     
     def setlist(item,nameCard,descriptionClass,priceClass,websitewhich,imageClass,hrefClass):
         if str(websitewhich)=='flipkart':
-            name=item.find('div',class_=nameCard).text
+            name=item.find('div',class_=nameCard)
+            if name ==None:
+                name=item.find('a',class_='IRpwTa').text
+
+            else:
+                name=name.text
             dis=item.find('a',class_=descriptionClass)['title']
             price=item.find('div',class_=priceClass).text[1:]
             price=''.join(price.split(','))
@@ -88,7 +93,7 @@ def getdata(itemname):
             else:
                 price=price.text[3:]
             if item.find('img',class_=imageClass)==None:
-                img='not available'
+                img='https://womens-southerngolfassociation.org/wp-content/uploads/2021/10/Image-Not-Available.png'
             else:
                 img=item.find('img',class_=imageClass)['src']
             href=item.find('a')['href']
@@ -121,7 +126,7 @@ def getdata(itemname):
             driver.get(pageurl2+str(enum))
             itemPage=driver.page_source
             idk = BeautifulSoup(itemPage,'html.parser')
-            #driver.close()
+            driver.close()
             if namewebsites[no]=='flipkart':
                 itemCards=idk.find_all('div',class_=cardClass)[1:]
             elif namewebsites[no]=='amazon':

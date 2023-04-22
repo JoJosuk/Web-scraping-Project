@@ -16,13 +16,21 @@ def itemgive(request):
     contextt={'d':arr}
     return render(request, 'core/itemgive.html',contextt)
 def intermediate(request):
-    keywords = request.GET.get('keywords')
-    pricel=request.GET.get('pricel')
-    priceh=request.GET.get('priceh')
-    keywords=list(map(str,keywords.split()))
     sbtable=pd.read_excel('./data.xlsx')
+    keywords = request.GET.get('keywords')
+    min_price=request.GET.get('pricel')
+    max_price=request.GET.get('priceh')
+    if min_price=='':
+        min_price=0
+    if max_price=='':
+        max_price=float(max(sbtable['Price']))
+    min_price,max_price=float(min_price),float(max_price)
+    keywords=list(map(str,keywords.split()))
+    sbtable['Price']=sbtable['Price'].astype(float)
+    print(sbtable.dtypes)
     for i in keywords:
         sbtable=sbtable[sbtable['Description'].str.contains(i)]
+    sbtable=sbtable[(sbtable['Price'] > min_price) & (sbtable['Price'] <= max_price)]
     table=sbtable
     json_records=table.reset_index().to_json(orient='records')
     arr=[]
