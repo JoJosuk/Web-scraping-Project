@@ -30,8 +30,28 @@ website page of the specified product and returns the html file.
     object and the required data is extracted from the HTML using BS. The class
     names and known and certain tags without class names are accessed by 
     indexing tag.
+    
+    
+## Python Installation
+
+Install the required libraries by running 
+
+```
+pip install -r requirements.txt
+```
+
+Change directory to radon and run the webserver
+
+```
+cd radon
+
+python manage.py runserver
+```
+
 
 ## Docker Image + Running Container
+
+**This is for users who have docker installed on their systems**
 
 Create the docker image by running the following command at the the root directory of the project.
 
