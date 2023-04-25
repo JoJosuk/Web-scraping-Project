@@ -59,8 +59,8 @@ def getdata(itemname,scale):
     keyWords=[]
     itemList=[]
     
-    websites = [myntra(itemName),amazon(itemName),flipkart_fashion(itemName)]
-    namewebsites=['myntra','amazon','flipkart']
+    websites = [amazon(itemName),flipkart_fashion(itemName)]
+    namewebsites=['amazon','flipkart']
     
     def setlist(item,nameCard,descriptionClass,priceClass,websitewhich,imageClass,hrefClass):
         if str(websitewhich)=='flipkart':
