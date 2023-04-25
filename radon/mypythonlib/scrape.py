@@ -45,8 +45,8 @@ class myntra:
     
     
 
-def getdata(itemname):
-    print(itemname)
+def getdata(itemname,scale):
+    scale=int(scale)+1
     itemName='%20'.join(itemname.strip().split())
     keyWords=[]
     itemList=[]
@@ -58,8 +58,11 @@ def getdata(itemname):
         if str(websitewhich)=='flipkart':
             name=item.find('div',class_=nameCard)
             if name ==None:
-                name=item.find('a',class_='IRpwTa').text
-
+                name=item.find('a',class_='IRpwTa')
+                if name==None:
+                    return [None,None,None,None,None,None]
+                else:
+                    name=name.text
             else:
                 name=name.text
             dis=item.find('a',class_=descriptionClass)['title']
@@ -71,7 +74,11 @@ def getdata(itemname):
             keyWords.extend(dis.split())
             return [name,dis,float(price),img,'https://www.flipkart.com'+str(href),'FLIPKART']
         elif str(websitewhich)=='amazon':
-            name=item.find('span',class_=nameCard).text
+            name=item.find('span',class_=nameCard)
+            if name==None:
+                return[None,None,None,None,None,None]
+            else:
+                name=name.text
             dis=item.find('span',class_=descriptionClass).text
             price=item.find('span',class_=priceClass)
             if price==None:
@@ -85,7 +92,11 @@ def getdata(itemname):
             keyWords.extend(dis.split())
             return [name,dis,float(price),img,'https://www.amazon.com'+str(href),'AMAZON']
         elif str(websitewhich)=='myntra':
-            name=item.find('h3',class_=nameCard).text
+            name=item.find('h3',class_=nameCard)
+            if name==None:
+                return[None,None,None,None,None,None]
+            else:
+                name=name.text
             dis=item.find('h4',class_=descriptionClass).text
             price=item.find('span',class_=priceClass)
             if price==None:
@@ -105,7 +116,6 @@ def getdata(itemname):
             #     price=price[3:]
             # if price==None:
             #     price=0
-            print(price)
             keyWords.extend(dis.split())
             return [name,dis,float(price),img,'https://www.myntra.com/'+str(href),'MYNTRA']
         
@@ -124,7 +134,7 @@ def getdata(itemname):
         pageurl2=i.pageurl2
         hrefClass=i.hrefClass
         # itemPage=requests.get(pageurl,headers={'User-Agent': 'Mozilla/5.0'}).content
-        for enum in range(1,2):
+        for enum in range(1,scale):
             
             chrome_options = webdriver.ChromeOptions()
             chrome_options.add_argument("--no-sandbox")
@@ -145,6 +155,11 @@ def getdata(itemname):
         
 
             itemList.extend([setlist(item,nameCard,descriptionClass,priceClass,namewebsites[no],imageClass,hrefClass) for item in itemCards])
+    cia=[]
+    for i in itemList:
+        if None not in i:
+            cia.append(i)
+    itemList=cia
        
     table=pd.DataFrame(itemList,columns=['Name','Description','Price','Image','Link','Website'])
     table=table.sort_values(by='Price')

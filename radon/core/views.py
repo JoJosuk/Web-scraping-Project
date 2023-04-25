@@ -10,7 +10,8 @@ def index(request):
     return render(request, 'core/index.html')
 def itemgive(request):
     itemNames=request.GET.get('item')
-    table,cou=scrape.getdata(itemNames)
+    scale=request.GET.get('scale')
+    table,cou=scrape.getdata(itemNames,scale)
     # cou=json.dumps(cou, indent = 4) 
     json_records=table.reset_index().to_json(orient='records')
     arr=[]
