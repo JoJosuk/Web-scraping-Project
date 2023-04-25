@@ -1,14 +1,41 @@
 {% extends 'core/base.html' %}
 {% block content %}
-
 <body class="part2">
     <div class="cont">
         <form action="intermediate">
             <input type="text" name="keywords" placeholder="Enter the keywords">
+            {% if cou %}
+            
+            <div class='key'>
+                {% for i in cou %}
+                <div class="smallcard">
+                    <a href='./intermediate?keywords={{i}}&pricel=&priceh='>{{i}}</a>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% comment %} {{ data_json|json_script:"data" }}
+            <div>
+                {% for key, value in data.items %}
+                    {% if key == 'cou' %}
+                        <h1>{{ value }}</h1>
+                    {% endif %}
+                {% endfor %}
+            </div> {% endcomment %}
             <input type="text" name="pricel" placeholder='Price Filter Start'>
             <input type="text" name="priceh" placeholder='Price Filter End'>
             <input type="submit" style='display:None;'>
         </form>
+    </div>
+    <div class="che" style='padding: 2rem;'>
+        {% if chart %}
+        {{ chart|safe }}
+        {% endif %}
+        <div id="i"  style='padding: 2rem;'>
+            {% if chart2 %}
+            {{ chart2|safe }}
+            {% endif %}
+        </div>
     </div>
     <div class="idk">
         {% if d %}

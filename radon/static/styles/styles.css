@@ -107,6 +107,41 @@ input[type="text"] {
   display:flex;
   flex-wrap: wrap;
 }
+.che{
+  margin: 2rem;
+  border-radius: 1rem;
+  padding: 2rem;
+}
+.key{
+  display: flex;
+  flex-wrap: wrap;
+}
+.smallcard{
+  width:7%;
+  border-radius: 0.5rem;
+  margin: 0.5rem;
+  background-color: black;
+  padding: 0.25rem;
+}
+.smallcard:hover{
+  border-radius: 0.5rem;
+  border: 1px solid white;
+  transition: 0.5s;
+  
+  background: linear-gradient(
+    130deg, 
+    var(--g1) 33%, 
+    var(--g2) 66%, 
+    var(--g3) 100%
+  );
+}
+.smallcard a{
+  font-size: 13px;
+  color: white;
+  font-family: "Anek Latin", sans-serif;
+  text-align: center;
+  width: 100%;
+}
 .cont{
   
   background: linear-gradient(

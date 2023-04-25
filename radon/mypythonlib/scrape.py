@@ -3,6 +3,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import numpy as np
+import plotly.express as px
+from collections import Counter
+
 
 class flipkart_fashion:
     def __init__(self,itemName) -> None:
@@ -127,7 +131,7 @@ def getdata(itemname):
             chrome_options.add_argument("--headless")
             chrome_options.add_argument("--disable-gpu")
             chrome_options.add_argument('--disable-dev-shm-usage')     
-            driver = webdriver.Chrome(options=chrome_options)
+            driver = webdriver.Chrome()
             driver.get(pageurl2+str(enum))
             itemPage=driver.page_source
             idk = BeautifulSoup(itemPage,'html.parser')
@@ -145,6 +149,7 @@ def getdata(itemname):
     table=pd.DataFrame(itemList,columns=['Name','Description','Price','Image','Link','Website'])
     table=table.sort_values(by='Price')
     table=table.reset_index(drop=True)
-    table.to_excel('data.xlsx')  
- 
-    return table
+    table.to_excel('data.xlsx')
+    cou=dict(Counter(keyWords).most_common(30))
+
+    return (table,cou)
