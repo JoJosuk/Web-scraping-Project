@@ -2,8 +2,8 @@
 {% block content %}
 <body class="part2">
     <div class="cont">
-        <form action="intermediate">
-            <input type="text" name="keywords" placeholder="Enter the keywords">
+        <form action="intermediate" id='ttt'>
+            <input type="text"  name="keywords" placeholder="Enter the keywords">
             {% if cou %}
             
             <div class='key'>
@@ -22,8 +22,8 @@
                     {% endif %}
                 {% endfor %}
             </div> {% endcomment %}
-            <input type="text" name="pricel" placeholder='Price Filter Start'>
-            <input type="text" name="priceh" placeholder='Price Filter End'>
+            <input type="number" name="pricel" placeholder='Price Filter Start'>
+            <input type="number" name="priceh" placeholder='Price Filter End'>
             <input type="submit" style='display:None;'>
         </form>
     </div>
@@ -52,6 +52,9 @@
         {% endfor %}
         {% endif %}
     
+    </div>
+    <div class="card-content" style='width=90vw;height:5rem;display:flex;align-items:center;justify-items:center;'>
+        <h2 class='card-title' style='text-align:center;'>No More Results 😔</h2>
     </div>
 </body>
 {% endblock content %}

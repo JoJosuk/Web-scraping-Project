@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.options import Options
 import numpy as np
 import plotly.express as px
 from collections import Counter
-
+import requests
 
 class flipkart_fashion:
     def __init__(self,itemName) -> None:
@@ -46,7 +46,15 @@ class myntra:
     
 
 def getdata(itemname,scale):
+    try:    
+        int(scale)
+    except:
+        scale=1
     scale=int(scale)+1
+    if scale>5:
+        scale=5
+    if itemname=='':
+        itemname='pants'
     itemName='%20'.join(itemname.strip().split())
     keyWords=[]
     itemList=[]
@@ -120,8 +128,8 @@ def getdata(itemname,scale):
             return [name,dis,float(price),img,'https://www.myntra.com/'+str(href),'MYNTRA']
         
     # WINDOW_SIZE = "1920,1080"
-    # chrome_options = Options()
-    # chrome_options.add_argument("--headless")
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
     # chrome_options.add_argument("--window-size=%s" % WINDOW_SIZE)
     
     for no,i in enumerate(websites):      
@@ -135,17 +143,23 @@ def getdata(itemname,scale):
         hrefClass=i.hrefClass
         # itemPage=requests.get(pageurl,headers={'User-Agent': 'Mozilla/5.0'}).content
         for enum in range(1,scale):
-            
-            chrome_options = webdriver.ChromeOptions()
-            chrome_options.add_argument("--no-sandbox")
-            chrome_options.add_argument("--headless")
-            chrome_options.add_argument("--disable-gpu")
-            chrome_options.add_argument('--disable-dev-shm-usage')     
-            driver = webdriver.Chrome()
-            driver.get(pageurl2+str(enum))
-            itemPage=driver.page_source
-            idk = BeautifulSoup(itemPage,'html.parser')
-            driver.close()
+            if namewebsites[no]=='flipkart':
+                itemPage=requests.get(pageurl2+str(enum)).content
+                idk=BeautifulSoup(itemPage,'html.parser') 
+            elif namewebsites[no]=='amazon':
+                for i in range(20):
+                    itemPage=requests.get(pageurl2+str(enum)).content
+                    if BeautifulSoup(itemPage,'html.parser').find('div',{'data-component-type': 's-search-result'})==None:
+                        continue
+                    else:
+                        idk=BeautifulSoup(itemPage,'html.parser')
+                        break
+            elif namewebsites[no]=='myntra':  
+                driver = webdriver.Chrome()
+                driver.get(pageurl2+str(enum))
+                itemPage=driver.page_source
+                idk = BeautifulSoup(itemPage,'html.parser')
+                driver.close()
             if namewebsites[no]=='flipkart':
                 itemCards=idk.find_all('div',class_=cardClass)[1:]
             elif namewebsites[no]=='amazon':
