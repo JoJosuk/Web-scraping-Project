@@ -12,9 +12,8 @@ class Flipkart:
         self.name_class='s1Q9rs'
         self.price_class='_30jeq3'
         self.image_class='CXW8mj'
-        
         self.error=False
-        self.itemName=itemName
+        self.itemName=itemName.replace(' ','%20')
         self.itemPage:BeautifulSoup=BeautifulSoup(
             self.getPage(self.getSearchLink()),'html.parser'
             )
@@ -70,3 +69,4 @@ class Flipkart:
 
 if __name__=='__main__':
     obj=Flipkart('book')
+

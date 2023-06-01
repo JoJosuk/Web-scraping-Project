@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<body class="part2">
+    <div class="cont">
+        <form action="intermediate" id='ttt'>
+            <input type="text"  name="keywords" placeholder="Enter the keywords">
+            {% if cou %}
+            
+            <div class='key'>
+                {% for i in cou %}
+                <div class="smallcard">
+                    <a href='./intermediate?keywords={{i}}&pricel=&priceh='>{{i}}</a>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% comment %} {{ data_json|json_script:"data" }}
+            <div>
+                {% for key, value in data.items %}
+                    {% if key == 'cou' %}
+                        <h1>{{ value }}</h1>
+                    {% endif %}
+                {% endfor %}
+            </div> {% endcomment %}
+            <input type="number" name="pricel" placeholder='Price Filter Start'>
+            <input type="number" name="priceh" placeholder='Price Filter End'>
+            <input type="submit" style='display:None;'>
+        </form>
+    </div>
+    <div class="che" style='padding: 2rem;'>
+        {% if chart %}
+        {{ chart|safe }}
+        {% endif %}
+        <div id="i"  style='padding: 2rem;'>
+            {% if chart2 %}
+            {{ chart2|safe }}
+            {% endif %}
+        </div>
+    </div>
+    <div class="idk">
+        {% if d %}
+        {% for i in d %}
+        <div class="card two">
+    
+            <div class="card-content">
+                <a class='card-title' href="{{i.Link}}">{{i.Name}}</a>
+                <h1 class='card-title'>{{i.Price}}</h1>
+                <img src="{{i.Image}}" alt="">
+                <h2 class='card-title'>{{i.Website}}</h2>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    
+    </div>
+    <div class="card-content" style='width=90vw;height:5rem;display:flex;align-items:center;justify-items:center;'>
+        <h2 class='card-title' style='text-align:center;'>No More Results 😔</h2>
+    </div>
+</body>
+{% endblock content %}

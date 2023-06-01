@@ -30,3 +30,48 @@ website page of the specified product and returns the html file.
     object and the required data is extracted from the HTML using BS. The class
     names and known and certain tags without class names are accessed by 
     indexing tag.
+    
+    
+## Python Installation
+
+Install the required libraries by running 
+
+```
+pip install -r requirements.txt
+```
+
+Change directory to radon and run the webserver
+
+```
+cd radon
+
+python manage.py runserver
+```
+
+
+## Docker Image + Running Container
+
+**This is for users who have docker installed on their systems**
+
+Create the docker image by running the following command at the the root directory of the project.
+
+```
+docker build -t fashion_scraper .
+```
+
+Run the following command to start the container 
+
+```
+docker run --name web -p 8000:8000 fashion_scraper
+```
+
+The container will now be runnign on port 8000
+Visit http://localhost:8080/ to view the application
+
+Stop the container by running
+
+```
+docker stop web
+
+docker container prune -f
+```
