@@ -8,6 +8,17 @@ import plotly.express as px
 from collections import Counter
 import requests
 
+def clean_keywords(keywords:list[str],itemname)->list:
+    new_keywords=[]
+    blacklist=['for','the','with',itemname.lower()]
+    
+    for i in keywords:
+        word=i.lower()
+        if (word not in blacklist) and word.isalpha():
+            new_keywords.append(i)
+    return new_keywords
+
+
 class flipkart_fashion:
     def __init__(self,itemName) -> None:
         self.items=itemName
@@ -180,5 +191,5 @@ def getdata(itemname,scale):
     table=table.reset_index(drop=True)
     table.to_excel('data.xlsx')
     cou=dict(Counter(keyWords).most_common(30))
-
+    cou=clean_keywords(cou,itemname)
     return (table,cou)
